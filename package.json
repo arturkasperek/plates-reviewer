@@ -39,6 +39,13 @@
   },
   "jest": {
     "preset": "react-native",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|react-navigation|@react-navigation/.*|@react-native-community/masked-view|@react-native-mapbox-gl/maps/*|react-native-push-notification|@react-native-community/push-notification-ios|@react-native-community/async-storage))"
+    ],
+    "setupFiles": [
+      "./setupJest.js"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
