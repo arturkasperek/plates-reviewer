@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, StatusBar} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, StatusBar, FlatList, Image} from 'react-native';
 import {NavigationStackProp} from 'react-navigation-stack';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+
+import * as API from '../utils/API';
 
 import ReportList from '../components/ReportList';
 
@@ -11,10 +13,33 @@ interface Props {
 
 const Main = ({navigation}: Props) => {
   const [buttonText] = useState('Report Car');
+  const [report, setReport] = useState();
+  const [test, settest] = useState();
+
+  const getAllReports = async () => {
+    try {
+      const fetchedReport = await API.getAllReport();
+      if (fetchedReport) {
+        setReport(fetchedReport.result);
+        settest('dupa');
+      }
+    } catch (err) {
+      settest(err);
+    }
+  };
+
+  useEffect(() => {
+    settest('pupa');
+    getAllReports();
+  }, []);
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#3700B3" />
+      <View
+      style={{marginTop:10}}>
+        <ReportList report={report}/>
+      </View>
       <View style={styles.reportCont}>
         <TouchableOpacity
           style={styles.reportButton}
@@ -24,7 +49,6 @@ const Main = ({navigation}: Props) => {
           <Text style={styles.reportButtonText}>{buttonText}</Text>
         </TouchableOpacity>
       </View>
-      <ReportList />
     </View>
   );
 };
@@ -46,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#EF6C00',
     borderRadius: 25,
     paddingVertical: 10,
-    marginVertical: 20,
+    marginVertical: 10,
   },
   reportButtonText: {
     fontSize: 18,
