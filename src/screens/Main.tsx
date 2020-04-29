@@ -21,7 +21,6 @@ const Main = ({navigation}: Props) => {
       const fetchedReport = await API.getAllReport();
       if (fetchedReport) {
         setReport(fetchedReport.result);
-        settest('dupa');
       }
     } catch (err) {
       settest(err);
@@ -29,16 +28,14 @@ const Main = ({navigation}: Props) => {
   };
 
   useEffect(() => {
-    settest('pupa');
     getAllReports();
   }, []);
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#3700B3" />
-      <View
-      style={{marginTop:10}}>
-        <ReportList report={report}/>
+      <View style={{marginTop: 10}}>
+        <ReportList report={report} />
       </View>
       <View style={styles.reportCont}>
         <TouchableOpacity
