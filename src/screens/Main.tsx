@@ -35,7 +35,7 @@ const Main = ({navigation}: Props) => {
     <View style={styles.container}>
       <StatusBar backgroundColor="#3700B3" />
       <View style={{marginTop: 10}}>
-        <ReportList report={report} />
+        <ReportList report={report} navi={navigation} />
       </View>
       <View style={styles.reportCont}>
         <TouchableOpacity

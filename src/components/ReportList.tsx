@@ -1,12 +1,21 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, StyleSheet, View, Text, Image} from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 const ReportList = props => {
-  const [report, setReport] = useState(props.report);
+  const [report, setReport] = useState();
+  const [nav, setnav] = useState();
 
   useEffect(() => {
     setReport(props.report);
-  }, [props.report]);
+    setnav(props.navi);
+  }, [props.report, props.navi]);
 
   return (
     <FlatList
@@ -14,16 +23,21 @@ const ReportList = props => {
       data={report}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) => (
-        <View style={styles.listObject}>
-          <Image style={styles.image} source={{uri: item.mediaURL}} />
-          <View style={styles.descriptionView}>
-            <Text style={styles.platesNumber}> {item.platesNumber}</Text>
-            <Text style={styles.dateAdded}>
-              {' '}
-              {item.updatedAt.substring(0, 10)}
-            </Text>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            nav.navigate('Details');
+          }}>
+          <View style={styles.listObject}>
+            <Image style={styles.image} source={{uri: item.mediaURL}} />
+            <View style={styles.descriptionView}>
+              <Text style={styles.platesNumber}> {item.platesNumber}</Text>
+              <Text style={styles.dateAdded}>
+                {' '}
+                {item.updatedAt.substring(0, 10)}
+              </Text>
+            </View>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       )}
     />
   );
