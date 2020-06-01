@@ -1,12 +1,8 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {NavigationStackProp} from 'react-navigation-stack';
 
-interface Props {
-  navigation: NavigationStackProp<{}>;
-}
 
-const ReportCar = ({navigation}: Props) => {
+const ReportCar = (navigation) => {
   return (
     <View style={styles.container}>
       <Text>Report Him!</Text>

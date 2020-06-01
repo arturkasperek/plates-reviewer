@@ -10,11 +10,11 @@ import {
 
 const ReportList = props => {
   const [report, setReport] = useState();
-  const [nav, setnav] = useState();
+  const [nav, setNav] = useState();
 
   useEffect(() => {
     setReport(props.report);
-    setnav(props.navi);
+    setNav(props.navi);
   }, [props.report, props.navi]);
 
   return (
@@ -25,7 +25,16 @@ const ReportList = props => {
       renderItem={({item}) => (
         <TouchableWithoutFeedback
           onPress={() => {
-            nav.navigate('Details');
+            nav.navigate('Details', {
+              id: item.id,
+              comment: item.comment,
+              long: item.long,
+              lat: item.lat,
+              mediaURL: item.mediaURL,
+              platesNumber: item.platesNumber,
+              createdAt: item.createdAt,
+              updatedAt: item.updatedAt,
+            });
           }}>
           <View style={styles.listObject}>
             <Image style={styles.image} source={{uri: item.mediaURL}} />

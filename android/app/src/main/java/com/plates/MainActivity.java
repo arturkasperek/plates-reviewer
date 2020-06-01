@@ -1,4 +1,4 @@
-package com.platesreviewer;
+package com.plates;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "PlatesReviewer";
+    return "plates";
   }
 }

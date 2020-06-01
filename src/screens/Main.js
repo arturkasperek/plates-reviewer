@@ -1,17 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, StatusBar, FlatList, Image} from 'react-native';
-import {NavigationStackProp} from 'react-navigation-stack';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
 import * as API from '../utils/API';
-
 import ReportList from '../components/ReportList';
 
-interface Props {
-  navigation: NavigationStackProp<{}>;
-}
-
-const Main = ({navigation}: Props) => {
+const Main = props => {
+  const {navigation} = props;
   const [buttonText] = useState('Report Car');
   const [report, setReport] = useState();
   const [test, settest] = useState();
