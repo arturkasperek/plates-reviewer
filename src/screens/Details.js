@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet,Image} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 
 const Details = ({route, navigation}) => {
   const {platesNumber} = route.params;
@@ -11,9 +11,8 @@ const Details = ({route, navigation}) => {
   const {createdAt} = route.params;
   const {updatedAt} = route.params;
 
-
   return (
-    <View >
+    <View>
       <Image style={styles.image} source={{uri: mediaURL}} />
       <Text>plates number: {platesNumber}</Text>
       <Text>id: {id}</Text>
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 200,
-    
   },
 });
 
