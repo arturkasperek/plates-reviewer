@@ -1,4 +1,17 @@
 {
-  "name": "plates",
-  "displayName": "plates"
+  "name": "platesreviewerexpo",
+  "displayName": "platesreviewerexpo",
+  "expo": {
+    "name": "platesreviewerexpo",
+    "slug": "platesreviewerexpo",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
 }
