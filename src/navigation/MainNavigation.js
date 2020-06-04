@@ -5,6 +5,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import Main from '../screens/Main';
 import ReportCar from '../screens/ReportCar';
 import Details from '../screens/Details';
+import CameraScreen from '../screens/CameraScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function MainNavigation() {
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="ReportCar" component={ReportCar} />
         <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen name="Camera" component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
