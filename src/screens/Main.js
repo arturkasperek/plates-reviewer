@@ -4,8 +4,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import * as API from '../utils/API';
 import ReportList from '../components/ReportList';
 
-const Main = props => {
-  const {navigation} = props;
+const Main = ({navigation}) => {
   const [buttonText] = useState('Report Car');
   const [report, setReport] = useState();
   const [test, settest] = useState();
