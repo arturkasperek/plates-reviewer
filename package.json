@@ -1,58 +1,42 @@
 {
-  "name": "PlatesReviewer",
-  "version": "0.0.1",
-  "private": true,
+  "main": "index.js",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "web": "expo start --web",
     "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "test": "jest"
   },
   "dependencies": {
-    "@react-native-community/masked-view": "^0.1.9",
+    "@react-native-community/masked-view": "0.1.6",
+    "@react-navigation/native": "^5.5.0",
+    "@react-navigation/stack": "^5.4.1",
+    "expo": "^37.0.0",
+    "expo-splash-screen": "^0.2.3",
+    "expo-updates": "~0.2.1",
     "react": "16.9.0",
-    "react-native": "0.61.5",
-    "react-native-gesture-handler": "^1.6.1",
-    "react-native-reanimated": "^1.8.0",
-    "react-native-safe-area-context": "^0.7.3",
-    "react-native-screens": "^2.4.0",
-    "react-navigation": "^4.3.7",
-    "react-navigation-stack": "^2.3.11",
-    "yarn": "^1.22.4"
+    "react-dom": "16.9.0",
+    "react-native": "0.61.4",
+    "react-native-camera": "^3.26.0",
+    "react-native-gesture-handler": "~1.6.0",
+    "react-native-reanimated": "~1.7.0",
+    "react-native-safe-area-context": "0.7.3",
+    "react-native-screens": "~2.2.0",
+    "react-native-unimodules": "~0.8.1",
+    "react-native-web": "^0.11.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.2",
+    "@babel/core": "~7.9.0",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
-    "@types/jest": "^24.0.24",
-    "@types/react-native": "^0.60.25",
-    "@types/react-test-renderer": "16.9.1",
-    "@typescript-eslint/eslint-plugin": "^2.12.0",
-    "@typescript-eslint/parser": "^2.12.0",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "~25.2.6",
     "eslint": "^6.5.1",
-    "jest": "^25.3.0",
-    "metro-react-native-babel-preset": "^0.56.0",
-    "react-test-renderer": "16.9.0",
-    "typescript": "^3.7.3"
+    "jest": "~25.2.6",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "react-test-renderer": "~16.9.0"
   },
   "jest": {
-    "preset": "react-native",
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|react-navigation|@react-navigation/.*|@react-native-community/masked-view|@react-native-mapbox-gl/maps/*|react-native-push-notification|@react-native-community/push-notification-ios|@react-native-community/async-storage))"
-    ],
-    "setupFiles": [
-      "./setupJest.js"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  }
+    "preset": "react-native"
+  },
+  "private": true
 }
