@@ -12,7 +12,6 @@ const cameraScreen = ({navigation}) => {
       const options = {quality: 0.5, base64: true};
       const data = await cameraRef.current.takePictureAsync(options);
       console.log(data.uri);
-      navigation.navigate('ReportCar', {uri: data.uri});
     }
   };
 
@@ -45,19 +44,19 @@ const cameraScreen = ({navigation}) => {
           buttonPositive: 'Ok',
           buttonNegative: 'Cancel',
         }}>
-        <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
+        <View style={styles.buttonsArea}>
           <TouchableOpacity
             onPress={() => toggleFlash()}
             style={styles.capture}>
-            <Text style={{fontSize: 14}}> flash </Text>
+            <Text style={styles.buttonText}> flash </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => takePicture()}
             style={styles.capture}>
-            <Text style={{fontSize: 14}}> SNAP </Text>
+            <Text style={styles.buttonText}> SNAP </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => flipCamera()} style={styles.capture}>
-            <Text style={{fontSize: 14}}> type </Text>
+            <Text style={styles.buttonText}> type </Text>
           </TouchableOpacity>
         </View>
       </RNCamera>
@@ -75,6 +74,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  buttonsArea: {
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontSize: 14,
   },
   capture: {
     flex: 0,
