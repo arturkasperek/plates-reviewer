@@ -4,7 +4,8 @@ import { Camera } from "expo-camera";
 import * as Permissions from "expo-permissions";
 
 const cameraScreen = ({ navigation }) => {
-  const [hasPermission, setHasPermission] = useState(null);
+  const cameraRef = useRef(null);
+  const [hasPermissions, setHasPermissions] = useState(false);
   const [camType, setCamType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
 
@@ -14,15 +15,22 @@ const cameraScreen = ({ navigation }) => {
         Permissions.CAMERA,
         Permissions.CAMERA_ROLL
       );
-      if (status === "granted") return setHasPermission("granted");
+      if (status === 'granted') {
+        setHasPermissions(true);
+      }
     })();
   }, []);
 
   const takePicture = async () => {
-    if (hasPermission === "granted") {
-      const options = { quality: 0.5, base64: true };
-      const data = await hasPermission.current.takePictureAsync(options);
-      console.log(data.uri);
+    const options = { quality: 0.5, base64: true };
+    try {
+      const data = await cameraRef.current.takePictureAsync(options);
+
+      navigation.navigate('ReportCar', {
+        imageURI: data.uri,
+      });
+    } catch (e) {
+      console.error('Error during making image', e);
     }
   };
 
@@ -42,7 +50,7 @@ const cameraScreen = ({ navigation }) => {
     }
   };
 
-  if (hasPermission === null) {
+  if (!hasPermissions) {
     return <View />;
   } else {
     return (
@@ -51,9 +59,7 @@ const cameraScreen = ({ navigation }) => {
           style={styles.preview}
           type={camType}
           flashMode={flash}
-          ref={(ref) => {
-            setHasPermission(ref);
-          }}
+          ref={cameraRef}
         >
           <View style={styles.buttonsArea}>
             <TouchableOpacity
@@ -63,7 +69,7 @@ const cameraScreen = ({ navigation }) => {
               <Text style={styles.buttonText}> flash </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => takePicture()}
+              onPress={takePicture}
               style={styles.capture}
             >
               <Text style={styles.buttonText}> SNAP </Text>
