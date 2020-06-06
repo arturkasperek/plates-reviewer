@@ -31,6 +31,8 @@ const SelectPhotoScreen = ({ navigation }) => {
           imageURI: result.uri,
         });
         setImage(result.uri);
+      } else {
+        navigation.navigate("ReportCar");
       }
     } catch (e) {
       console.error("Error during selecting image", e);
