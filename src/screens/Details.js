@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
+import {Layout} from "../components/Layout";
 
 const Details = ({route, navigation}) => {
   const {platesNumber} = route.params;
@@ -12,14 +13,16 @@ const Details = ({route, navigation}) => {
   const {updatedAt} = route.params;
 
   return (
-    <View>
-      <Image style={styles.image} source={{uri: mediaURL}} />
-      <Text>plates number: {platesNumber}</Text>
-      <Text>id: {id}</Text>
-      <Text>comment: {comment}</Text>
-      <Text>created At: {createdAt}</Text>
-      <Text>updated At:{updatedAt}</Text>
-    </View>
+    <Layout>
+      <View>
+        <Image style={styles.image} source={{uri: mediaURL}} />
+        <Text>plates number: {platesNumber}</Text>
+        <Text>id: {id}</Text>
+        <Text>comment: {comment}</Text>
+        <Text>created At: {createdAt}</Text>
+        <Text>updated At:{updatedAt}</Text>
+      </View>
+    </Layout>
   );
 };
 

@@ -1,35 +1,21 @@
 import React, { useState } from "react";
 import get from "lodash/get";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {Layout} from "../components/Layout";
+import {Button} from "../components/Button";
 
 const ReportCar = ({ navigation, props, route }) => {
   const imageURI = get(route, "params.imageURI");
 
   return (
-    <View style={styles.container}>
-      {imageURI && <Image style={styles.image} source={{ uri: imageURI }} />}
-      <Text>Report Him!</Text>
-      <TouchableOpacity
-        style={styles.cameraButton}
-        onPress={() => {
-          navigation.navigate("Camera");
-        }}
-      >
-        <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
-          Take a photo
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.cameraButton}
-        onPress={() => {
-          navigation.navigate("Photo");
-        }}
-      >
-        <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
-          Select photo
-        </Text>
-      </TouchableOpacity>
-    </View>
+    <Layout>
+      <View style={styles.container}>
+        {imageURI && <Image style={styles.image} source={{ uri: imageURI }} />}
+        <Text>Report Him!</Text>
+        <Button onPress={()=>navigation.navigate("Camera")} title={'Take a photo'}/>
+        <Button onPress={()=>navigation.navigate("Photo")} title={'Select photo'}/>
+      </View>
+    </Layout>
   );
 };
 
@@ -41,7 +27,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#EEEEEE",
   },
   cameraButton: {
     width: 300,

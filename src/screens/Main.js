@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listWrapper: {
-    marginTop: 10,
     flex: 1,
   },
   reportBar: {

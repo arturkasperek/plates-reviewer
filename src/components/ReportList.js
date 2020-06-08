@@ -57,12 +57,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   flatList: {
-    marginTop: 10,
   },
   listObject: {
-    backgroundColor: 'white',
-    marginHorizontal: 10,
-    marginBottom: 10,
+    backgroundColor: '#EEEEEE',
+    marginBottom: 20,
     flex: 1,
     flexDirection: 'column',
     elevation: 5,
