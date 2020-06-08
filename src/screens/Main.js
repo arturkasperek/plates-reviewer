@@ -1,72 +1,57 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, StatusBar, FlatList, Image} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import * as API from '../utils/API';
 import ReportList from '../components/ReportList';
+import {Button} from "../components/Button";
+import {Layout} from "../components/Layout";
 
 const Main = ({navigation}) => {
-  const [buttonText] = useState('Report Car');
   const [report, setReport] = useState();
-  const [test, settest] = useState();
-
-  const getAllReports = async () => {
-    try {
-      const fetchedReport = await API.getAllReport();
-      if (fetchedReport) {
-        setReport(fetchedReport.result);
-      }
-    } catch (err) {
-      settest(err);
-    }
-  };
 
   useEffect(() => {
+    const getAllReports = async () => {
+      try {
+        const fetchedReport = await API.getAllReport();
+        if (fetchedReport) {
+          setReport(fetchedReport.result);
+        }
+      } catch (err) {
+        console.error('Err: ', err);
+      }
+    };
+
     getAllReports();
   }, []);
 
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="#3700B3" />
-      <View style={{marginTop: 10}}>
-        <ReportList report={report} navi={navigation} />
+    <Layout>
+      <View style={styles.container}>
+        <StatusBar backgroundColor="#3700B3" />
+        <ScrollView style={styles.scrollView}>
+          <View style={{marginTop: 10}}>
+            <ReportList report={report} navi={navigation} />
+          </View>
+        </ScrollView>
+        <View style={styles.reportBar}>
+          <Button onPress={() => navigation.navigate('ReportCar')} title={'Report Car'}/>
+        </View>
       </View>
-      <View style={styles.reportCont}>
-        <TouchableOpacity
-          style={styles.reportButton}
-          onPress={() => {
-            navigation.navigate('ReportCar');
-          }}>
-          <Text style={styles.reportButtonText}>{buttonText}</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollView: {
+  },
+  reportBar: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  reportCont: {
-    flexGrow: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  reportButton: {
-    width: 300,
-    backgroundColor: '#EF6C00',
-    borderRadius: 25,
-    paddingVertical: 10,
-    marginVertical: 10,
-  },
-  reportButtonText: {
-    fontSize: 18,
-    color: '#fff',
-    fontWeight: '500',
-    textAlign: 'center',
   },
 });
 
