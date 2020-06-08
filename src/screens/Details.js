@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { findToken } from "../utils/LocalDatabase";
+import { Layout } from "../components/Layout";
 
 const Details = ({ route, navigation }) => {
   const [editable = false, setEditable] = useState();
@@ -20,20 +21,22 @@ const Details = ({ route, navigation }) => {
   }, []);
 
   return (
-    <View>
-      <Image style={styles.image} source={{ uri: mediaURL }} />
-      <Text>plates number: {platesNumber}</Text>
-      <Text>id: {id}</Text>
-      <Text>comment: {comment}</Text>
-      <Text>created At: {createdAt}</Text>
-      <Text>updated At:{updatedAt}</Text>
-      {/* Przykład użycia (wystarczy podstawić button w miejsce "możesz edytować" i id w miejsce "abc" w findToken) */}
-      {editable ? (
-        <Text>możesz edytować</Text>
-      ) : (
-        <Text>nie możesz edytować</Text>
-      )}
-    </View>
+    <Layout>
+      <View>
+        <Image style={styles.image} source={{ uri: mediaURL }} />
+        <Text>plates number: {platesNumber}</Text>
+        <Text>id: {id}</Text>
+        <Text>comment: {comment}</Text>
+        <Text>created At: {createdAt}</Text>
+        <Text>updated At:{updatedAt}</Text>
+        {/* Przykład użycia (wystarczy podstawić button w miejsce "możesz edytować" i id w miejsce "abc" w findToken) */}
+        {editable ? (
+          <Text>możesz edytować</Text>
+        ) : (
+          <Text>nie możesz edytować</Text>
+        )}
+      </View>
+    </Layout>
   );
 };
 

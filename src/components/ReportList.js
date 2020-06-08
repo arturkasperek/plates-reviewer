@@ -57,13 +57,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   flatList: {
-    height: 530,
   },
   listObject: {
-    backgroundColor: 'white',
-    marginHorizontal: 10,
-    marginBottom: 10,
-    borderRadius: 8,
+    backgroundColor: '#EEEEEE',
+    marginBottom: 20,
     flex: 1,
     flexDirection: 'column',
     elevation: 5,
@@ -71,8 +68,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: 200,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
   },
   descriptionView: {
     flexDirection: 'column',

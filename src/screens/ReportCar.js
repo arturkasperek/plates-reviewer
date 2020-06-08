@@ -14,58 +14,33 @@ const pri = () => {
   });
 };
 
+import { Layout } from "../components/Layout";
+import { Button } from "../components/Button";
+
 const ReportCar = ({ navigation, props, route }) => {
   const imageURI = get(route, "params.imageURI");
 
   return (
-    <View style={styles.container}>
-      {imageURI && <Image style={styles.image} source={{ uri: imageURI }} />}
-      <Text>Report Him!</Text>
-      <TouchableOpacity
-        style={styles.cameraButton}
-        onPress={() => {
-          navigation.navigate("Camera");
-        }}
-      >
-        <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
-          Take a photo
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.cameraButton}
-        onPress={() => {
-          navigation.navigate("Photo");
-        }}
-      >
-        <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
-          Select photo
-        </Text>
-      </TouchableOpacity>
-      {/* Poniższy 'przycisk' jest do susunięcia, 
+    <Layout>
+      <View style={styles.container}>
+        {imageURI && <Image style={styles.image} source={{ uri: imageURI }} />}
+        <Text>Report Him!</Text>
+        <Button
+          onPress={() => navigation.navigate("Camera")}
+          title={"Take a photo"}
+        />
+        <Button
+          onPress={() => navigation.navigate("Photo")}
+          title={"Select photo"}
+        />
+        {/* Poniższy 'przycisk' jest do susunięcia, 
           doodany tylko w celu testowania metody dodającej token do bazy */}
-      <TouchableOpacity
-        style={styles.cameraButton}
-        onPress={() => {
-          insert("x");
-        }}
-      >
-        <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
-          Add
-        </Text>
-      </TouchableOpacity>
-      {/* Poniższy 'przycisk' jest do susunięcia, 
-          doodany tylko w celu testowania metody dodającej token do bazy */}
-      <TouchableOpacity
-        style={styles.cameraButton}
-        onPress={() => {
-          pri();
-        }}
-      >
-        <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
-          Find
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <Button onPress={() => insert("x")} title={"Add"} />
+        {/* Poniższy 'przycisk' jest do susunięcia, 
+          doodany tylko w celu testowania metody spr czy dany token jest w bazie */}
+        <Button onPress={() => pri()} title={"Find"} />
+      </View>
+    </Layout>
   );
 };
 
@@ -77,7 +52,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#EEEEEE",
   },
   cameraButton: {
     width: 300,
