@@ -1,6 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import get from "lodash/get";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { insert, findToken } from "../utils/LocalDatabase";
+
+// Przykład użycia metody sprawdzxajacej czy istneije token
+const pri = () => {
+  findToken("x").then((value) => {
+    if (value) {
+      console.log("jest w bazie!");
+    } else {
+      console.log("nie ma w bazie!");
+    }
+  });
+};
 
 const ReportCar = ({ navigation, props, route }) => {
   const imageURI = get(route, "params.imageURI");
@@ -27,6 +39,30 @@ const ReportCar = ({ navigation, props, route }) => {
       >
         <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
           Select photo
+        </Text>
+      </TouchableOpacity>
+      {/* Poniższy 'przycisk' jest do susunięcia, 
+          doodany tylko w celu testowania metody dodającej token do bazy */}
+      <TouchableOpacity
+        style={styles.cameraButton}
+        onPress={() => {
+          insert("x");
+        }}
+      >
+        <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
+          Add
+        </Text>
+      </TouchableOpacity>
+      {/* Poniższy 'przycisk' jest do susunięcia, 
+          doodany tylko w celu testowania metody dodającej token do bazy */}
+      <TouchableOpacity
+        style={styles.cameraButton}
+        onPress={() => {
+          pri();
+        }}
+      >
+        <Text style={{ color: "#ffff", fontSize: 20, textAlign: "center" }}>
+          Find
         </Text>
       </TouchableOpacity>
     </View>
