@@ -27,11 +27,9 @@ const Main = ({navigation}) => {
     <Layout>
       <View style={styles.container}>
         <StatusBar backgroundColor="#3700B3" />
-        <ScrollView style={styles.scrollView}>
-          <View style={{marginTop: 10}}>
-            <ReportList report={report} navi={navigation} />
-          </View>
-        </ScrollView>
+        <View style={styles.listWrapper}>
+          <ReportList report={report} navi={navigation} />
+        </View>
         <View style={styles.reportBar}>
           <Button onPress={() => navigation.navigate('ReportCar')} title={'Report Car'}/>
         </View>
@@ -44,7 +42,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  scrollView: {
+  listWrapper: {
+    marginTop: 10,
+    flex: 1,
   },
   reportBar: {
     paddingTop: 10,
