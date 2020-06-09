@@ -1,25 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import * as API from '../utils/API';
-import ReportList from '../components/ReportList';
-import {Button} from "../components/Button";
-import {Layout} from "../components/Layout";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, StatusBar, ScrollView } from "react-native";
+import * as API from "../utils/API";
+import ReportList from "../components/ReportList";
+import { Button } from "../components/Button";
+import { Layout } from "../components/Layout";
 
-const Main = ({navigation}) => {
+const Main = ({ route, navigation }) => {
   const [report, setReport] = useState();
 
-  useEffect(() => {
-    const getAllReports = async () => {
-      try {
-        const fetchedReport = await API.getAllReport();
-        if (fetchedReport) {
-          setReport(fetchedReport.result);
-        }
-      } catch (err) {
-        console.error('Err: ', err);
+  const getAllReports = async () => {
+    try {
+      const fetchedReport = await API.getAllReport();
+      if (fetchedReport) {
+        setReport(fetchedReport.result);
       }
-    };
+    } catch (err) {
+      console.error("Err: ", err);
+    }
+  };
 
+  useEffect(() => {
     getAllReports();
   }, []);
 
@@ -31,7 +31,10 @@ const Main = ({navigation}) => {
           <ReportList report={report} navi={navigation} />
         </View>
         <View style={styles.reportBar}>
-          <Button onPress={() => navigation.navigate('ReportCar')} title={'Report Car'}/>
+          <Button
+            onPress={() => navigation.navigate("ReportCar")}
+            title={"Report Car"}
+          />
         </View>
       </View>
     </Layout>
@@ -48,9 +51,9 @@ const styles = StyleSheet.create({
   reportBar: {
     paddingTop: 10,
     paddingBottom: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
