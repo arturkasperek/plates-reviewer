@@ -12,15 +12,18 @@ import carImagePlaceholder from '../media/car-placeholder.png';
 const ReportCar = ({ navigation, props, route }) => {
   const imageURI = get(route, "params.imageURI");
   const [platesNumber, setPlatesNumber] = useState("");
+  const [comment, setComment] = useState('');
   const [mediaUrl, setMediaUrl] = useState();
   const [lat, setLat] = useState("");
   const [long, setLong] = useState("");
   const [submitInProgress, setSubmitInProgress] = useState(false);
 
-  const submitReport = async (lat, long, mediaUrl, plateNumber) => {
+  const submitReport = async (lat, long, mediaUrl, plateNumber, comment) => {
     try {
-      const fetchedReport = await API.createReport(lat, long, mediaUrl, plateNumber);
-      console.log('fetchedReport is ', fetchedReport);
+      const fetchedReport = await API.createReport(lat, long, mediaUrl, plateNumber, comment);
+      navigation.navigate("Main", {
+        reload: true,
+      })
     } catch (err) {
       console.error("Err: ", err);
     }
@@ -87,20 +90,27 @@ const ReportCar = ({ navigation, props, route }) => {
           value={platesNumber}
           placeholder={'Plates number ...'}
         />
-        <Text>Latitude:</Text>
+        <Text>Comment:</Text>
+        <Input
+          style={styles.commentInput}
+          onChangeText={setComment}
+          value={comment}
+          placeholder={'Comment ...'}
+        />
+        <Text>Latitude*:</Text>
         <Input
           onChangeText={setLat}
           value={lat}
           placeholder={'Latitude ...'}
         />
-        <Text>Longitude:</Text>
+        <Text>Longitude*:</Text>
         <Input
           onChangeText={setLong}
           value={long}
           placeholder={'Longitude ...'}
         />
         <Button
-          onPress={() => submitReport(lat, long, mediaUrl, platesNumber)}
+          onPress={() => submitReport(lat, long, mediaUrl, platesNumber, comment)}
           title={"Report!"}
         />
 
@@ -115,6 +125,10 @@ const ReportCar = ({ navigation, props, route }) => {
 const styles = StyleSheet.create({
   firstButton: {
     marginBottom: 20,
+  },
+  commentInput: {
+    height: 100,
+    textAlignVertical: 'top',
   },
   buttonWrapper: {
     marginBottom: 20,

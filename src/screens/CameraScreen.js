@@ -66,7 +66,7 @@ const cameraScreen = ({ navigation }) => {
               onPress={() => toggleFlash()}
               style={styles.capture}
             >
-              <Text style={styles.buttonText}> flash </Text>
+              <Text style={styles.buttonText}> Flash </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={takePicture}
@@ -78,7 +78,7 @@ const cameraScreen = ({ navigation }) => {
               onPress={() => flipCamera()}
               style={styles.capture}
             >
-              <Text style={styles.buttonText}> type </Text>
+              <Text style={styles.buttonText}> Flip </Text>
             </TouchableOpacity>
           </View>
         </Camera>
@@ -104,11 +104,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonText: {
-    fontSize: 14,
+    color: 'white',
   },
   capture: {
     flex: 0,
-    backgroundColor: "#fff",
+    backgroundColor: '#311B92',
     borderRadius: 5,
     padding: 15,
     paddingHorizontal: 20,

@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, StatusBar, ScrollView } from "react-native";
+import {View, StyleSheet, StatusBar, ScrollView, ActivityIndicator} from "react-native";
+import get from 'lodash/get';
 import * as API from "../utils/API";
 import ReportList from "../components/ReportList";
 import { Button } from "../components/Button";
 import { Layout } from "../components/Layout";
 
 const Main = ({ route, navigation }) => {
+  const reload = get(route, 'params.reload', false);
   const [report, setReport] = useState();
+  const [inProgress, setInProgress] = useState(false);
 
   const getAllReports = async () => {
     try {
+      setInProgress(true);
       const fetchedReport = await API.getAllReport();
       if (fetchedReport) {
         setReport(fetchedReport.result);
       }
+      setInProgress(false);
     } catch (err) {
       console.error("Err: ", err);
     }
@@ -23,12 +28,23 @@ const Main = ({ route, navigation }) => {
     getAllReports();
   }, []);
 
+  useEffect(() => {
+    if ( reload === true ) {
+      getAllReports();
+    }
+  }, [reload]);
+
   return (
     <Layout scrollable={false}>
       <View style={styles.container}>
         <StatusBar backgroundColor="#3700B3" />
         <View style={styles.listWrapper}>
-          <ReportList report={report} navi={navigation} />
+          {!inProgress && (
+            <ReportList report={report} navi={navigation} />
+          )}
+          {inProgress && (
+            <ActivityIndicator size="large" color="#f2be12" />
+          )}
         </View>
         <View style={styles.reportBar}>
           <Button

@@ -5,7 +5,10 @@ import {StyleSheet} from "react-native";
 export const Input = (props) => {
   return (
     <RNInput
-      inputStyle={styles.main}
+      inputStyle={{
+        ...styles.main,
+        ...props.style,
+      }}
       {...props}
     />
   )
