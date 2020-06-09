@@ -2,12 +2,48 @@ import React, { useState, useEffect } from "react";
 import get from "lodash/get";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { insert } from "../utils/LocalDatabase";
-
 import { Layout } from "../components/Layout";
 import { Button } from "../components/Button";
+import * as API from "../utils/API";
+import { TextInput } from "react-native-gesture-handler";
 
 const ReportCar = ({ navigation, props, route }) => {
   const imageURI = get(route, "params.imageURI");
+  const [plateNumber, setplateNumber] = useState("none");
+  const [mediaUrl, setMediaUrl] = useState();
+  const [lat, setLat] = useState("40");
+  const [long, setLong] = useState("40");
+
+  var photo = {
+    uri: imageURI,
+    type: "image/jpeg",
+    name: "photo.jpg",
+  };
+
+  const setCarImg = async (img) => {
+    try {
+      const fetchedReport = await API.uploadCarImage(img);
+      if (fetchedReport) {
+        setplateNumber(fetchedReport.platesProposal);
+        setMediaUrl(fetchedReport.url);
+      }
+    } catch (err) {
+      console.error("Err: ", err);
+    }
+  };
+
+  const submitReport = async (lat, long, mediaUrl, plateNumber) => {
+    try {
+      const fetchedReport = await API.createReport(
+        lat,
+        long,
+        mediaUrl,
+        plateNumber
+      );
+    } catch (err) {
+      console.error("Err: ", err);
+    }
+  };
 
   return (
     <Layout>
@@ -22,6 +58,30 @@ const ReportCar = ({ navigation, props, route }) => {
           onPress={() => navigation.navigate("Photo")}
           title={"Select photo"}
         />
+        <Button onPress={() => setCarImg(photo)} title={"check photo"} />
+        <Text>plate proposal:</Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setplateNumber(text)}
+          value={plateNumber}
+        />
+        <Text>lat:</Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setLat(text)}
+          value={lat}
+        />
+        <Text>long:</Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setLong(text)}
+          value={long}
+        />
+        <Button
+          onPress={() => submitReport(lat, long, mediaUrl, plateNumber)}
+          title={"submit report"}
+        />
+
         {/* Poniższy 'przycisk' jest do susunięcia, 
           doodany tylko w celu testowania metody dodającej token do bazy */}
         <Button onPress={() => insert("x")} title={"Add"} />
@@ -45,6 +105,11 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingVertical: 10,
     marginVertical: 10,
+  },
+  textInput: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
   },
 });
 
