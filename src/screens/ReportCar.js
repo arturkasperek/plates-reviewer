@@ -9,6 +9,8 @@ import * as API from "../utils/API";
 import { TextInput } from "react-native-gesture-handler";
 import carImagePlaceholder from "../media/car-placeholder.png";
 import * as Location from "expo-location";
+import { WebView } from "react-native-webview";
+import html_map from "../components/Map";
 
 const ReportCar = ({ navigation, props, route }) => {
   const imageURI = get(route, "params.imageURI");
@@ -136,6 +138,14 @@ const ReportCar = ({ navigation, props, route }) => {
           value={long}
           onChangeText={(e) => setLong(e.target.value)}
           placeholder={"Longitude ..." + long}
+        />
+        <WebView
+          source={{ html: html_map(lat, long, 9) }}
+          style={{
+            alignSelf: "center",
+            height: 200,
+            width: 300,
+          }}
         />
         <Button
           onPress={() =>
