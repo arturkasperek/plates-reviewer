@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import get from "lodash/get";
 import { View, Text, StyleSheet, ActivityIndicator, Image } from "react-native";
+import { insert } from "../utils/LocalDatabase";
 import { Layout } from "../components/Layout";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
@@ -102,6 +103,10 @@ const ReportCar = ({ navigation, props, route }) => {
           onPress={() => submitReport(lat, long, mediaUrl, platesNumber)}
           title={"Report!"}
         />
+
+        {/* Poniższy 'przycisk' jest do susunięcia,
+          doodany tylko w celu testowania metody dodającej token do bazy */}
+        <Button style={{marginTop: 10}} onPress={() => insert("x")} title={"Add to SQLLite"} />
       </View>
     </Layout>
   );
