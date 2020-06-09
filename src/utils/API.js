@@ -4,12 +4,14 @@ export const getAllReport = async () => {
       "http://lb-plates-reviewer-1807177165.eu-north-1.elb.amazonaws.com/report"
     );
     const json = await response.json();
+
+    console.log('json in ', json);
     return json;
   } catch (err) {}
 };
 
 export const uploadCarImage = async (img) => {
-  s3 = new FormData();
+  const s3 = new FormData();
   s3.append("image", img);
 
   try {
@@ -29,14 +31,13 @@ export const uploadCarImage = async (img) => {
 };
 
 export const createReport = async (lat, long, mediaURL, platesNumber) => {
-  dataReport = {
+  const dataReport = {
     lat: parseInt(lat, 10),
     long: parseInt(long, 10),
     mediaURL: mediaURL,
     platesNumber: platesNumber,
   };
 
-  console.log(dataReport);
   try {
     const response = await fetch(
       "http://lb-plates-reviewer-1807177165.eu-north-1.elb.amazonaws.com/report",

@@ -24,7 +24,7 @@ const Main = ({ route, navigation }) => {
   }, []);
 
   return (
-    <Layout>
+    <Layout scrollable={false}>
       <View style={styles.container}>
         <StatusBar backgroundColor="#3700B3" />
         <View style={styles.listWrapper}>
@@ -51,9 +51,6 @@ const styles = StyleSheet.create({
   reportBar: {
     paddingTop: 10,
     paddingBottom: 10,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
 
