@@ -21,7 +21,7 @@ const ReportCar = ({ navigation, props, route }) => {
 
   const setCarImg = async (img) => {
     try {
-      const fetchedReport = await API.setCarImage(img);
+      const fetchedReport = await API.uploadCarImage(img);
       if (fetchedReport) {
         setplateNumber(fetchedReport.platesProposal);
         setMediaUrl(fetchedReport.url);
@@ -31,9 +31,9 @@ const ReportCar = ({ navigation, props, route }) => {
     }
   };
 
-  const submitReport = async (p1, p2, p3, p4) => {
+  const submitReport = async (lat, long, mediaUrl, plateNumber) => {
     try {
-      const fetchedReport = await API.setReport(p1, p2, p3, p4);
+      const fetchedReport = await API.createReport(lat, long, mediaUrl, plateNumber);
     } catch (err) {
       console.error("Err: ", err);
     }

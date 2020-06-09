@@ -8,7 +8,7 @@ export const getAllReport = async () => {
   } catch (err) {}
 };
 
-export const setCarImage = async (img) => {
+export const uploadCarImage = async (img) => {
   s3 = new FormData();
   s3.append("image", img);
 
@@ -28,7 +28,7 @@ export const setCarImage = async (img) => {
   } catch (err) {}
 };
 
-export const setReport = async (lat, long, mediaURL, platesNumber) => {
+export const createReport = async (lat, long, mediaURL, platesNumber) => {
   dataReport = {
     lat: parseInt(lat, 10),
     long: parseInt(long, 10),
