@@ -1,7 +1,22 @@
 import * as SQLite from "expo-sqlite";
 import { Alert } from "react-native";
 
-export const db = SQLite.openDatabase("user_reports.db");
+const db = SQLite.openDatabase("user_reports.db");
+
+export const localDBinit = () => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      "create table if not exists report_tokens (id_token text primary key not null);",
+      [],
+      (tx, results) => {
+        console.log(results);
+      },
+      (tx, err) => {
+        console.log(err);
+      }
+    );
+  });
+};
 
 // Funkcja dodaje token do lokalnej bazy
 //

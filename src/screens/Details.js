@@ -4,7 +4,7 @@ import { findToken } from "../utils/LocalDatabase";
 import { Layout } from "../components/Layout";
 
 const Details = ({ route, navigation }) => {
-  const [editable = false, setEditable] = useState();
+  const [editable = false, setEditable] = useState(false);
   const { platesNumber } = route.params;
   const { id } = route.params;
   const { comment } = route.params;

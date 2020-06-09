@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from "react";
 import get from "lodash/get";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { insert, findToken } from "../utils/LocalDatabase";
-
-// Przykład użycia metody sprawdzxajacej czy istneije token
-const pri = () => {
-  findToken("x").then((value) => {
-    if (value) {
-      console.log("jest w bazie!");
-    } else {
-      console.log("nie ma w bazie!");
-    }
-  });
-};
+import { insert } from "../utils/LocalDatabase";
 
 import { Layout } from "../components/Layout";
 import { Button } from "../components/Button";
@@ -36,9 +25,6 @@ const ReportCar = ({ navigation, props, route }) => {
         {/* Poniższy 'przycisk' jest do susunięcia, 
           doodany tylko w celu testowania metody dodającej token do bazy */}
         <Button onPress={() => insert("x")} title={"Add"} />
-        {/* Poniższy 'przycisk' jest do susunięcia, 
-          doodany tylko w celu testowania metody spr czy dany token jest w bazie */}
-        <Button onPress={() => pri()} title={"Find"} />
       </View>
     </Layout>
   );
