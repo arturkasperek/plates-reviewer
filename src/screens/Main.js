@@ -40,7 +40,7 @@ const Main = ({ route, navigation }) => {
         <StatusBar backgroundColor="#3700B3" />
         <View style={styles.listWrapper}>
           {!inProgress && (
-            <ReportList report={report} navi={navigation} />
+            <ReportList report={report} navigation={navigation} />
           )}
           {inProgress && (
             <ActivityIndicator size="large" color="#f2be12" />
