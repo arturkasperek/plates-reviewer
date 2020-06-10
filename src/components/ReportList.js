@@ -8,15 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-const ReportList = props => {
-  const [report, setReport] = useState();
-  const [nav, setNav] = useState();
-
-  useEffect(() => {
-    setReport(props.report);
-    setNav(props.navi);
-  }, [props.report, props.navi]);
-
+const ReportList = ({navigation, report}) => {
   return (
     <FlatList
       style={styles.flatList}
@@ -25,7 +17,7 @@ const ReportList = props => {
       renderItem={({item}) => (
         <TouchableWithoutFeedback
           onPress={() => {
-            nav.navigate('Details', {
+            navigation.navigate('Details', {
               id: item.id,
               comment: item.comment,
               long: item.long,

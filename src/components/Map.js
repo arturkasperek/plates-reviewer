@@ -25,7 +25,7 @@ const html_map = (lat, lon, zoom) => `
         zoomOffset: -1
 	}).addTo(mymap);
 	L.marker([${lat}, ${lon}]).addTo(mymap)
-		.bindPopup("<b>I'm here</b><br />lat:${lat}<br />lon:${lon}").openPopup();
+		.bindPopup("<b>I'm here</b><br />lat:${lat}<br />lon:${lon}");
 	
 	//var popup = L.popup();
 

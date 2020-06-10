@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { findToken } from "../utils/LocalDatabase";
 import { Layout } from "../components/Layout";
+import html_map from "../components/Map";
+import {WebView} from "react-native-webview";
 
 const Details = ({ route, navigation }) => {
-  const [editable = false, setEditable] = useState(false);
   const { platesNumber } = route.params;
   const { id } = route.params;
   const { comment } = route.params;
@@ -14,33 +15,43 @@ const Details = ({ route, navigation }) => {
   const { createdAt } = route.params;
   const { updatedAt } = route.params;
 
-  useEffect(() => {
-    findToken("abc").then((value) => {
-      setEditable(value);
-    });
-  }, []);
-
   return (
     <Layout>
       <View>
         <Image style={styles.image} source={{ uri: mediaURL }} />
-        <Text>plates number: {platesNumber}</Text>
-        <Text>id: {id}</Text>
-        <Text>comment: {comment}</Text>
-        <Text>created At: {createdAt}</Text>
-        <Text>updated At:{updatedAt}</Text>
-        {/* Przykład użycia (wystarczy podstawić button w miejsce "możesz edytować" i id w miejsce "abc" w findToken) */}
-        {editable ? (
-          <Text>możesz edytować</Text>
-        ) : (
-          <Text>nie możesz edytować</Text>
-        )}
+        <View style={styles.row}><Text style={styles.label}>Plates number: </Text><Text style={styles.value}>{platesNumber}</Text></View>
+        <View style={styles.row}><Text style={styles.label}>Comment: </Text><Text style={styles.value}>{comment}</Text></View>
+        <View style={styles.mapWrapper}>
+          <WebView
+            source={{ html: html_map(lat, long, 9) }}
+            style={styles.mapItem}
+          />
+        </View>
       </View>
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
+  mapWrapper: {
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  mapItem: {
+    alignSelf: "center",
+    height: 200,
+    width: '100%',
+  },
+  row: {
+    flexDirection: 'row'
+  },
+  label: {
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  value: {
+    fontSize: 18,
+  },
   container: {
     alignItems: "center",
     backgroundColor: "#E6A92A",

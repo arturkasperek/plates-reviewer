@@ -64,18 +64,22 @@ const ReportCar = ({ navigation, props, route }) => {
     if (imageURI) {
       loadImage();
     }
+  }, [imageURI]);
 
-    (async () => {
+  useEffect(() => {
+    const loadPosition = async () => {
       let { status } = await Location.requestPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLat(location.coords.latitude);
-      setLong(location.coords.longitude);
-    })();
-  }, [imageURI]);
+      setLat(location.coords.latitude.toString());
+      setLong(location.coords.longitude.toString());
+    };
+
+    loadPosition();
+  }, []);
 
   return (
     <Layout>
@@ -122,10 +126,6 @@ const ReportCar = ({ navigation, props, route }) => {
           value={comment}
           placeholder={"Comment ..."}
         />
-        {/* Tu trzeba naprawić... value inputa nie przyjmuje hooka */}
-        {/* Artur, do iosa wystarczy ze doinstalujesz pody, mi na to niestety komp nie pozwolil */}
-        <Text>{lat}</Text>
-        <Text>{long}</Text>
         <Text>{errorMsg}</Text>
         <Text>Latitude*:</Text>
         <Input
@@ -141,11 +141,7 @@ const ReportCar = ({ navigation, props, route }) => {
         />
         <WebView
           source={{ html: html_map(lat, long, 9) }}
-          style={{
-            alignSelf: "center",
-            height: 200,
-            width: 300,
-          }}
+          style={styles.mapItem}
         />
         <Button
           onPress={() =>
@@ -167,6 +163,12 @@ const ReportCar = ({ navigation, props, route }) => {
 };
 
 const styles = StyleSheet.create({
+  mapItem: {
+    alignSelf: "center",
+    height: 200,
+    width: 300,
+    marginBottom: 20,
+  },
   firstButton: {
     marginBottom: 20,
   },
