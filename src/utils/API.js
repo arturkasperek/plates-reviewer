@@ -4,7 +4,7 @@ export const getAllReport = async () => {
   );
   const json = await response.json();
 
-  console.log('json in ', json);
+  console.log("json in ", json);
   return json;
 };
 
@@ -26,10 +26,16 @@ export const uploadCarImage = async (img) => {
   return json;
 };
 
-export const createReport = async (lat, long, mediaURL, platesNumber, comment) => {
+export const createReport = async (
+  lat,
+  long,
+  mediaURL,
+  platesNumber,
+  comment
+) => {
   const dataReport = {
-    lat: parseInt(lat, 10),
-    long: parseInt(long, 10),
+    lat: parseFloat(lat, 10),
+    long: parseFloat(long, 10),
     mediaURL: mediaURL,
     platesNumber: platesNumber,
     comment: comment,
