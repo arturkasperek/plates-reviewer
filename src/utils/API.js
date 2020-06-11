@@ -1,10 +1,9 @@
-export const getAllReport = async () => {
+export const getAllReport = async (search) => {
   const response = await fetch(
-    "http://lb-plates-reviewer-1807177165.eu-north-1.elb.amazonaws.com/report"
+    `http://lb-plates-reviewer-1807177165.eu-north-1.elb.amazonaws.com/report${search ? `?search=${search}` : ''}`
   );
   const json = await response.json();
 
-  console.log("json in ", json);
   return json;
 };
 

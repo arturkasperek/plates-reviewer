@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {View, StyleSheet, StatusBar, ScrollView, ActivityIndicator} from "react-native";
 import get from 'lodash/get';
+import debounce from 'lodash/debounce';
 import * as API from "../utils/API";
 import ReportList from "../components/ReportList";
 import { Button } from "../components/Button";
 import { Layout } from "../components/Layout";
+import {Input} from "../components/Input";
 
 const Main = ({ route, navigation }) => {
   const reload = get(route, 'params.reload', false);
+  const isFirstRun = useRef(true);
+  const [search, setSearch] = useState('');
   const [report, setReport] = useState();
   const [inProgress, setInProgress] = useState(false);
 
-  const getAllReports = async () => {
+  const getAllReports = async (search) => {
     try {
       setInProgress(true);
-      const fetchedReport = await API.getAllReport();
+      const fetchedReport = await API.getAllReport(search);
       if (fetchedReport) {
         setReport(fetchedReport.result);
       }
@@ -24,20 +28,35 @@ const Main = ({ route, navigation }) => {
     }
   };
 
+  const debouncedQuery = debounce((search) => {
+    getAllReports(search);
+  }, 1000);
+  const debounceRef = useRef(debouncedQuery);
+
   useEffect(() => {
-    getAllReports();
-  }, []);
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+
+    debounceRef.current(search);
+  }, [search]);
 
   useEffect(() => {
     if ( reload === true ) {
-      getAllReports();
+      getAllReports(search);
     }
   }, [reload]);
+
+  useEffect(() => {
+    getAllReports(search);
+  }, []);
 
   return (
     <Layout scrollable={false}>
       <View style={styles.container}>
         <StatusBar backgroundColor="#3700B3" />
+        <Input placeholder={'Search ...'} value={search} onChangeText={setSearch}/>
         <View style={styles.listWrapper}>
           {!inProgress && (
             <ReportList report={report} navigation={navigation} />
